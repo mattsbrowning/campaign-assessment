@@ -18,10 +18,18 @@ public class WebMvcConfig implements WebMvcConfigurer {
         this.rateLimitInterceptor = rateLimitInterceptor;
     }
 
+    // Swagger UI and OpenAPI spec endpoints are public — no auth or rate limiting.
+    private static final String[] PUBLIC_PATHS = {
+        "/swagger-ui.html",
+        "/swagger-ui/**",
+        "/v3/api-docs/**",
+        "/v3/api-docs.yaml"
+    };
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // Auth is checked first; rate limiting only applies to authenticated requests.
-        registry.addInterceptor(apiKeyInterceptor);
-        registry.addInterceptor(rateLimitInterceptor);
+        registry.addInterceptor(apiKeyInterceptor).excludePathPatterns(PUBLIC_PATHS);
+        registry.addInterceptor(rateLimitInterceptor).excludePathPatterns(PUBLIC_PATHS);
     }
 }
