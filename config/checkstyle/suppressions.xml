@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC
+    "-//Checkstyle//DTD SuppressionFilter Configuration 1.2//EN"
+    "https://checkstyle.org/dtds/suppressions_1_2.dtd">
+
+<suppressions>
+    <!--
+        JUnit 5 test methods conventionally use underscores to separate
+        the method-under-test, scenario, and expected outcome
+        (e.g. assess_lowBudget_producesWarning). Suppress the MethodName
+        check in test sources rather than sacrificing readability.
+    -->
+    <suppress checks="MethodName" files=".*Test\.java"/>
+    <suppress checks="MethodName" files=".*IntegrationTest\.java"/>
+</suppressions>
